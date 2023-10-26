@@ -14,7 +14,7 @@ public class ConfigLoader {
 
 
 
-    public ConfigLoader(Path _path_to_config) throws IOException {
+    public ConfigLoader(String _path_to_config) throws IOException {
         load(_path_to_config);
     }
 
@@ -24,9 +24,9 @@ public class ConfigLoader {
 
 
 
-    public void load(Path _path_to_config) throws IOException {
+    public void load(String _path_to_config) throws IOException {
 
-        File config_file = new File(_path_to_config.toString());
+        File config_file = new File(_path_to_config);
 
         try (FileInputStream inputStream = new FileInputStream(config_file)) {
 

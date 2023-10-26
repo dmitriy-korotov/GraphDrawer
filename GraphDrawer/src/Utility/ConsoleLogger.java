@@ -10,7 +10,7 @@ public class ConsoleLogger implements ILogger {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Calendar date = Calendar.getInstance();
 
-        System.out.printf("[%s][%s] %s", formatter.format(date), _level.toString(), _message);
+        System.out.printf("[%s][%s] %s\n", formatter.format(date.getTime()), _level.toString(), _message);
     }
 
 }
