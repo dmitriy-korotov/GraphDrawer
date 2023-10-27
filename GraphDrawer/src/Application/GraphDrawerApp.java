@@ -22,6 +22,7 @@ public class GraphDrawerApp extends Application implements ComponentListener {
         addComponentListener(this);
         LoadConfig();
         LinkComponents();
+        OnWindowOpen();
     }
 
 
@@ -39,12 +40,17 @@ public class GraphDrawerApp extends Application implements ComponentListener {
 
         m_coordinate_plane = new JPanel();
         m_coordinate_plane.setVisible(true);
-        m_coordinate_plane.setSize(getWidth() * 3 / 4, getHeight());
         m_coordinate_plane.setBackground(Color.cyan);
 
         getContentPane().setLayout(new BorderLayout());
-        getContentPane().add(m_coordinate_plane, BorderLayout.EAST);
+        getContentPane().add(m_coordinate_plane, BorderLayout.CENTER);
 
+    }
+
+
+
+    private void OnWindowOpen() {
+        setVisible(true);
         componentResized(null);
     }
 
@@ -53,9 +59,6 @@ public class GraphDrawerApp extends Application implements ComponentListener {
     public void componentResized(ComponentEvent _event) {
         if (m_sidebar != null) {
             m_sidebar.setSize(getWidth() / 4, getHeight());
-        }
-        if (m_coordinate_plane != null) {
-            m_coordinate_plane.setSize(getWidth() * 3 / 4, getHeight());
         }
     }
 

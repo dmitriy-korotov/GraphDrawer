@@ -38,7 +38,7 @@ public class PointsReader {
 
                 String line = reader.readLine();
 
-                if (Objects.equals(line, "\n") || Objects.equals(line, "")) {
+                if (Objects.equals(line, "\n") || Objects.equals(line, "") || line == null) {
                     break;
                 }
 

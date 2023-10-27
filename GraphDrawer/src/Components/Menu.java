@@ -3,6 +3,7 @@ package Components;
 import Application.GraphDrawerApp;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Menu extends JMenu {
 
@@ -38,9 +39,6 @@ public class Menu extends JMenu {
         menu_bar.add(this);
 
         m_context.setJMenuBar(menu_bar);
-
-        m_context.setLayout(null);
-        m_context.setVisible(true);
 
     }
 }
