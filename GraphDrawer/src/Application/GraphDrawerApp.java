@@ -1,5 +1,6 @@
 package Application;
 
+import Components.CoordinatePlaneWrapper;
 import Components.Menu;
 import Components.SideBar;
 
@@ -13,7 +14,7 @@ public class GraphDrawerApp extends Application implements ComponentListener {
 
     private Menu m_menu = null;
     private SideBar m_sidebar = null;
-    private JPanel m_coordinate_plane = null;
+    private CoordinatePlaneWrapper m_coordinate_plane = null;
 
 
 
@@ -37,13 +38,7 @@ public class GraphDrawerApp extends Application implements ComponentListener {
 
         m_menu = new Menu("Options", this);
         m_sidebar = new SideBar(this);
-
-        m_coordinate_plane = new JPanel();
-        m_coordinate_plane.setVisible(true);
-        m_coordinate_plane.setBackground(Color.cyan);
-
-        getContentPane().setLayout(new BorderLayout());
-        getContentPane().add(m_coordinate_plane, BorderLayout.CENTER);
+        m_coordinate_plane = new CoordinatePlaneWrapper(this);
 
     }
 
@@ -58,7 +53,7 @@ public class GraphDrawerApp extends Application implements ComponentListener {
 
     public void componentResized(ComponentEvent _event) {
         if (m_sidebar != null) {
-            m_sidebar.setSize(getWidth() / 4, getHeight());
+            m_sidebar.setPreferredSize(new Dimension(getWidth() / 4, getHeight()));
         }
     }
 
