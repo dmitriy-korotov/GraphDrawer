@@ -4,13 +4,18 @@ import Application.GraphDrawerApp;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 
 public class SideBar extends JPanel implements ComponentListener {
 
     private GraphDrawerApp m_context = null;
-    private FileInputField m_file_input_field = null;
+
+    private FileInputComponent m_file_input_field = null;
+
+
 
 
 
@@ -27,8 +32,29 @@ public class SideBar extends JPanel implements ComponentListener {
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-        m_file_input_field = new FileInputField(m_context);
+        m_file_input_field = new FileInputComponent(m_context);
         add(m_file_input_field, BorderLayout.NORTH);
+
+        JButton button = new JButton("Add new plane");
+        button.setVisible(true);
+
+        button.setActionCommand("Clicked");
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent _event) {
+                if (_event.getActionCommand().equals("Clicked")) {
+
+                    CoordinatePlane new_plane = new CoordinatePlane(m_context);
+
+                    var wrapper = m_context.GetCoordinatePlaneWrapper();
+
+                    wrapper.AddCoordinatePlane(new_plane);
+                    wrapper.SetupActivePlane(new_plane);
+                }
+            }
+        });
+
+        add(button);
 
         m_context.getContentPane().add(this, BorderLayout.WEST);
 
@@ -40,15 +66,15 @@ public class SideBar extends JPanel implements ComponentListener {
 
     }
 
-    public void componentMoved(ComponentEvent e) {
+    public void componentMoved(ComponentEvent _event) {
 
     }
 
-    public void componentShown(ComponentEvent e) {
+    public void componentShown(ComponentEvent _event) {
 
     }
 
-    public void componentHidden(ComponentEvent e) {
+    public void componentHidden(ComponentEvent _event) {
 
     }
 }

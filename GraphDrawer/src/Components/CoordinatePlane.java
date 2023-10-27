@@ -1,6 +1,7 @@
 package Components;
 
 import Application.GraphDrawerApp;
+import Utility.Graph;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,12 +11,19 @@ public class CoordinatePlane extends JComponent {
 
     private String m_x_title = "X";
     private String m_y_title = "Y";
+
     private Integer m_scale = 50;
-    private Integer m_left_padding = 100;
-    private Integer m_bottom_padding = 100;
+
+    private final Integer m_left_padding = 100;
+    private final Integer m_bottom_padding = 100;
+
     private Double m_max_x_value = Double.MIN_VALUE;
     private Double m_max_y_value = Double.MIN_VALUE;
-    //private ArrayList<IGraphDrawer2D> m_drawers = new ArrayList<>();
+    private Double m_min_x_value = Double.MAX_VALUE;
+    private Double m_min_y_value = Double.MAX_VALUE;
+
+    private final ArrayList<Graph> m_graphs = new ArrayList<>();
+
     private GraphDrawerApp m_context = null;
 
 
@@ -26,51 +34,70 @@ public class CoordinatePlane extends JComponent {
 
 
 
-    public void setTitleX(String _x_title) { m_x_title = _x_title; }
-    public void setTitleY(String _y_title) { m_y_title = _y_title; }
+    public void SetScale(int _scale) { m_scale = _scale; }
 
 
 
-    /*public void addDrawer(IGraphDrawer2D _graph_drawer)
-    {
-        m_max_x_value = Math.max(_graph_drawer.getMaxCoordinateX(), m_max_x_value);
-        m_max_y_value = Math.max(_graph_drawer.getMaxCoordinateY(), m_max_y_value);
-        transfomPoints(_graph_drawer);
-        m_drawers.add(_graph_drawer);
-    }*/
+    public void SetTitleX(String _x_title) { m_x_title = _x_title; }
+    public void SetTitleY(String _y_title) { m_y_title = _y_title; }
+
+
+
+    public void AddGraph(Graph _graph) {
+
+        m_max_x_value = Math.max(_graph.GetMaxCoordinateX(), m_max_x_value);
+        m_max_y_value = Math.max(_graph.GetMaxCoordinateY(), m_max_y_value);
+        m_min_x_value = Math.min(_graph.GetMinCoordinateX(), m_min_x_value);
+        m_min_y_value = Math.min(_graph.GetMinCoordinateY(), m_min_y_value);
+        m_graphs.add(_graph);
+    }
 
 
 
     protected void paintComponent(Graphics _draw_context) {
+
         super.paintComponent(_draw_context);
         Graphics2D ctx = (Graphics2D)_draw_context;
         ctx.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        drawPlane(ctx);
+        DrawPlane(ctx);
 
-        /*for (IGraphDrawer2D drawer:
-                m_drawers) {
-            drawer.draw(ctx);
-        }*/
+        DrawGraphs();
     }
 
 
-    private void drawPlane(Graphics2D _ctx) {
+
+    private void DrawGraphs() {
+        for (Graph graph:
+             m_graphs) {
+            DrawGraph(graph);
+        }
+    }
+
+
+
+    private void DrawGraph(Graph _graph) {
+
+    }
+
+
+
+    private void DrawPlane(Graphics2D _ctx) {
 
         _ctx.setBackground(Color.GRAY);
 
         _ctx.fillRect(m_left_padding, 0, getWidth() - m_left_padding, getHeight() - m_bottom_padding);
 
-        drawGrid(_ctx, m_scale);
+        DrawGrid(_ctx, m_scale);
 
-        drawAxisX(_ctx, m_left_padding, m_bottom_padding, getWidth() - m_left_padding);
-        drawAxisY(_ctx, m_left_padding, m_bottom_padding, getHeight() - m_bottom_padding);
+        DrawAxisX(_ctx, m_left_padding, m_bottom_padding, getWidth() - m_left_padding);
+        DrawAxisY(_ctx, m_left_padding, m_bottom_padding, getHeight() - m_bottom_padding);
 
         //drawValues(_ctx, 5);
     }
 
 
-    private void drawAxisX(Graphics2D _ctx, int _x, int _y, int _length) {
+    private void DrawAxisX(Graphics2D _ctx, int _x, int _y, int _length) {
 
         _ctx.setColor(Color.BLACK);
 
@@ -95,7 +122,7 @@ public class CoordinatePlane extends JComponent {
     }
 
 
-    private void drawAxisY(Graphics2D _ctx, int _x, int _y, int _length) {
+    private void DrawAxisY(Graphics2D _ctx, int _x, int _y, int _length) {
 
         _ctx.setColor(Color.BLACK);
 
@@ -176,7 +203,7 @@ public class CoordinatePlane extends JComponent {
     }
 */
 
-    private void drawGrid(Graphics2D _ctx, int _step) {
+    private void DrawGrid(Graphics2D _ctx, int _step) {
 
         _ctx.setColor(Color.WHITE);
 
@@ -188,22 +215,4 @@ public class CoordinatePlane extends JComponent {
         for (; start > 0; start -= _step)
             _ctx.drawLine(m_left_padding, start, getWidth(), start);
     }
-
-
-/*
-    private void transfomPoints(IGraphDrawer2D _drawer)
-    {
-        double max_x = _drawer.getMaxCoordinateX();
-        double max_y = _drawer.getMaxCoordinateY();
-
-        for (Point point:
-                _drawer.getPoints()) {
-
-            point.x = (int)(point.x / max_x * (getWidth() - m_padding_x - 50 )) + 15;
-            point.y = (int)(point.y / max_y * (getHeight() - m_padding_y - 15 )) + 15;
-
-            point.x += m_padding_x;
-            point.y = getHeight() - point.y - m_padding_y;
-        }
-    }*/
 }

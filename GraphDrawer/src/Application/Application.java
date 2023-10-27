@@ -11,9 +11,9 @@ import java.util.Properties;
 
 public class Application extends JFrame {
 
-    private static final ILogger m_logger = new ConsoleLogger();
+    protected static final ILogger m_logger = new ConsoleLogger();
 
-    private Properties m_config = null;
+    protected Properties m_config = null;
 
 
 
@@ -35,6 +35,7 @@ public class Application extends JFrame {
 
 
     private void LoadConfig(String _path_to_config) {
+
         ConfigLoader loader = new ConfigLoader();
 
         try {

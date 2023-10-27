@@ -4,7 +4,6 @@ import Application.GraphDrawerApp;
 import Utility.PointsReader;
 
 import javax.swing.*;
-import javax.swing.text.Style;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,15 +12,19 @@ import java.awt.event.ComponentListener;
 import java.io.IOException;
 import java.util.Objects;
 
-public class FileInputField extends JPanel implements ComponentListener {
+public class FileInputComponent extends JPanel implements ComponentListener {
 
     private GraphDrawerApp m_context = null;
+
     private JButton m_button = null;
+
     private JTextField m_file_input_field = null;
 
 
 
-    public FileInputField(GraphDrawerApp _context) {
+
+
+    public FileInputComponent(GraphDrawerApp _context) {
         m_context = _context;
         addComponentListener(this);
         SetupFields();
@@ -77,15 +80,15 @@ public class FileInputField extends JPanel implements ComponentListener {
         }
     }
 
-    public void componentMoved(ComponentEvent e) {
+    public void componentMoved(ComponentEvent _event) {
 
     }
 
-    public void componentShown(ComponentEvent e) {
+    public void componentShown(ComponentEvent _event) {
 
     }
 
-    public void componentHidden(ComponentEvent e) {
+    public void componentHidden(ComponentEvent _event) {
 
     }
 }

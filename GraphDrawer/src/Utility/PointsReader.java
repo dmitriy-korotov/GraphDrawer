@@ -10,7 +10,10 @@ import java.util.Objects;
 public class PointsReader {
 
     private final ArrayList<Point> m_points = new ArrayList<>();
+
     private String m_separator = " ";
+
+
 
 
 

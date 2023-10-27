@@ -9,7 +9,10 @@ public class Graph {
     private Double m_max_x = 0.;
     private Double m_min_y = 0.;
     private Double m_max_y = 0.;
+
     private ArrayList<Point> m_points = new ArrayList<>();
+
+
 
 
 
@@ -20,6 +23,7 @@ public class Graph {
 
 
     public void SetPoints(ArrayList<Point> _points) {
+
         m_points = _points;
         m_max_x = __getMaxCoordinateX();
         m_min_x = __getMinCoordinateX();
@@ -33,8 +37,8 @@ public class Graph {
 
 
 
-    public double __getMinCoordinateX()
-    {
+    public double __getMinCoordinateX() {
+
         double min_coord_x = Double.MAX_VALUE;
         for (Point point:
                 m_points) {
@@ -47,8 +51,8 @@ public class Graph {
 
 
 
-    public double __getMaxCoordinateX()
-    {
+    public double __getMaxCoordinateX() {
+
         double max_coord_x = Double.MIN_VALUE;
         for (Point point:
                 m_points) {
@@ -61,8 +65,8 @@ public class Graph {
 
 
 
-    public double __getMinCoordinateY()
-    {
+    public double __getMinCoordinateY() {
+
         double min_coord_y = Double.MAX_VALUE;
         for (Point point:
                 m_points) {
@@ -75,8 +79,8 @@ public class Graph {
 
 
 
-    public double __getMaxCoordinateY()
-    {
+    public double __getMaxCoordinateY() {
+
         double max_coord_y = Double.MIN_VALUE;
         for (Point point:
                 m_points) {
