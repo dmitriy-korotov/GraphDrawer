@@ -28,6 +28,8 @@ public class CoordinatePlane extends JComponent {
 
 
 
+
+
     public CoordinatePlane(GraphDrawerApp _context) {
         m_context = _context;
     }
@@ -141,7 +143,7 @@ public class CoordinatePlane extends JComponent {
 
     private void DrawPlane(Graphics2D _ctx) {
 
-        _ctx.setBackground(Color.GRAY);
+        _ctx.setColor(Color.LIGHT_GRAY);
 
         _ctx.fillRect(m_left_padding, 0, getWidth() - m_left_padding, getHeight() - m_bottom_padding);
 
@@ -150,7 +152,7 @@ public class CoordinatePlane extends JComponent {
         DrawAxisX(_ctx, m_left_padding, m_bottom_padding, getWidth() - m_left_padding);
         DrawAxisY(_ctx, m_left_padding, m_bottom_padding, getHeight() - m_bottom_padding);
 
-        //drawValues(_ctx, 5);
+        DrawValues(_ctx, 5);
     }
 
 
@@ -206,29 +208,39 @@ public class CoordinatePlane extends JComponent {
     }
 
 
-   /* private void drawValues(Graphics2D _ctx, int _count)
-    {
-        Double max_x = m_max_x_value;
-        Double max_y = m_max_y_value;
+   private void DrawValues(Graphics2D _ctx, int _count) {
 
-        Double step_x_val = (max_x / (double) _count);
-        Double step_y_val = (max_y / (double) _count);
+        double step_x_val = ((m_max_x_value - m_min_x_value) / (double) _count);
+        double step_y_val = ((m_max_y_value - m_min_y_value) / (double) _count);
 
-        Integer step_x_coord = (int)((getWidth() - m_padding_x) / _count);
-        Integer step_y_coord = (int)((getHeight() - m_padding_x) / _count);
+        if (m_graphs.isEmpty()) {
+            step_x_val = 0.;
+            step_y_val = 0.;
+        }
 
-        Double x_val = 0.;
-        Double y_val = 0.;
-        Integer x_coord = m_padding_x;
-        Integer y_coord = getHeight() - m_padding_y;
+        int step_x_coord = ((getWidth() - m_left_padding) / _count);
+        int step_y_coord = ((getHeight() - m_bottom_padding) / _count);
 
-        Font font = new Font("Arial", 3, 15);
+        double x_val = m_min_x_value;
+        double y_val = m_min_y_value;
+
+       if (m_graphs.isEmpty()) {
+           x_val = 0.;
+           y_val = 0.;
+       }
+
+        int x_coord = m_left_padding;
+        int y_coord = getHeight() - m_bottom_padding;
+
+        Font font = new Font("Arial", Font.ITALIC, 15);
         _ctx.setFont(font);
 
         for (int i = 0; i < _count; i++)
         {
-            _ctx.drawString(String.format("%.1f", x_val), x_coord, getHeight() - m_padding_y + 30);
-            _ctx.drawString(String.format("%.1f", y_val), m_padding_x - String.format("%.1f", y_val).length() * 10, y_coord);
+            _ctx.drawString(String.format("%.1f", x_val),
+                            x_coord, getHeight() - m_bottom_padding + 30);
+            _ctx.drawString(String.format("%.1f", y_val),
+                            m_left_padding - String.format("%.1f", y_val).length() * 12, y_coord);
 
             x_val += step_x_val;
             y_val += step_y_val;
@@ -237,8 +249,8 @@ public class CoordinatePlane extends JComponent {
             y_coord -= step_y_coord;
         }
 
-        x_coord = m_padding_x;
-        y_coord = getHeight() - m_padding_y;
+        x_coord = m_left_padding;
+        y_coord = getHeight() - m_bottom_padding;
 
         int scale = 10;
 
@@ -247,18 +259,20 @@ public class CoordinatePlane extends JComponent {
 
         for (int i = 0; i < _count * scale; i++)
         {
-            int coll_hegiht = (i % scale) == 0 ? 15 : 10;
-            int coll_width = (i % scale) == 0 ? 3 : 3;
+            int coll_hegiht = (i % scale) == 0 ? 10 : 5;
+            int coll_width = 2;
 
-            _ctx.fillRect(x_coord, getHeight() - m_padding_y - coll_hegiht + 5, coll_width, coll_hegiht - 5);
+            _ctx.fillRect(x_coord, getHeight() - m_bottom_padding - coll_hegiht,
+                          coll_width, coll_hegiht);
 
-            _ctx.fillRect(m_padding_x, y_coord, coll_hegiht, coll_width);
+            _ctx.fillRect(m_left_padding, y_coord, coll_hegiht, coll_width);
 
             x_coord += step_x_coord;
             y_coord -= step_y_coord;
         }
     }
-*/
+
+
 
     private void DrawGrid(Graphics2D _ctx, int _step) {
 

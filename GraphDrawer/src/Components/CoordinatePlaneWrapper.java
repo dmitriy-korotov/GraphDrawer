@@ -51,7 +51,7 @@ public class CoordinatePlaneWrapper extends JLayeredPane {
     public void AddCoordinatePlane(CoordinatePlane _plane) {
 
         m_coordinate_planes.add(_plane);
-        JMenuItem graph = new JMenuItem("Graph " + (m_coordinate_planes.size()));
+        JMenuItem graph = new JMenuItem("Plane " + (m_coordinate_planes.size()));
         graph.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         m_top_bar_items.add(graph);
 

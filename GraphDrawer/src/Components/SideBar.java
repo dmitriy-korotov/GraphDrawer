@@ -39,21 +39,24 @@ public class SideBar extends JPanel implements ComponentListener {
         button.setVisible(true);
 
         button.setActionCommand("Clicked");
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent _event) {
-                if (_event.getActionCommand().equals("Clicked")) {
+        button.addActionListener(_event -> {
+            if (_event.getActionCommand().equals("Clicked")) {
 
-                    CoordinatePlane new_plane = new CoordinatePlane(m_context);
+                CoordinatePlane new_plane = new CoordinatePlane(m_context);
 
-                    var wrapper = m_context.GetCoordinatePlaneWrapper();
+                var wrapper = m_context.GetCoordinatePlaneWrapper();
 
-                    wrapper.AddCoordinatePlane(new_plane);
-                }
+                wrapper.AddCoordinatePlane(new_plane);
             }
         });
 
-        add(button);
+
+        /*String[] courses = { "core java","advance java", "java servlet"};
+        JComboBox c = new JComboBox(courses);
+        c.setBounds(40,40,90,20);
+        add(c, BorderLayout.NORTH);*/
+
+        add(button, BorderLayout.SOUTH);
 
         m_context.getContentPane().add(this, BorderLayout.WEST);
 
