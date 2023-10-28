@@ -49,7 +49,6 @@ public class SideBar extends JPanel implements ComponentListener {
                     var wrapper = m_context.GetCoordinatePlaneWrapper();
 
                     wrapper.AddCoordinatePlane(new_plane);
-                    wrapper.SetupActivePlane(new_plane);
                 }
             }
         });

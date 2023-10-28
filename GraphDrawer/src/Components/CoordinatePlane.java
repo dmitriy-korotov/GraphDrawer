@@ -50,6 +50,7 @@ public class CoordinatePlane extends JComponent {
         m_min_x_value = Math.min(_graph.GetMinCoordinateX(), m_min_x_value);
         m_min_y_value = Math.min(_graph.GetMinCoordinateY(), m_min_y_value);
         m_graphs.add(_graph);
+        repaint();
     }
 
 
@@ -62,22 +63,78 @@ public class CoordinatePlane extends JComponent {
 
         DrawPlane(ctx);
 
-        DrawGraphs();
+        DrawGraphs(ctx);
     }
 
 
 
-    private void DrawGraphs() {
+    private void DrawGraphs(Graphics2D _ctx) {
         for (Graph graph:
              m_graphs) {
-            DrawGraph(graph);
+            DrawGraph(_ctx, graph);
         }
     }
 
 
 
-    private void DrawGraph(Graph _graph) {
+    private void DrawGraph(Graphics2D _ctx, Graph _graph) {
 
+        ArrayList<Point> points = TransformPoints(_graph.GetPoints());
+
+        if (points.isEmpty())
+            return;
+
+        _ctx.setColor(Color.RED);
+
+        int radius = 6;
+
+        Point prev_point = points.get(0);
+        for (Point point:
+             points) {
+            _ctx.drawLine(prev_point.x, prev_point.y, point.x, point.y);
+            _ctx.fillOval(point.x - radius / 2, point.y - radius / 2, radius, radius);
+
+            prev_point = point;
+        }
+    }
+
+
+
+    private ArrayList<Point> TransformPoints(ArrayList<Point> _points) {
+
+        ArrayList<Point> transformed_points = new ArrayList<>();
+
+        for (Point point:
+             _points) {
+
+            Point transformed_point = new Point();
+
+            if (point.x < m_min_x_value || point.x > m_max_x_value) {
+                continue;
+            }
+            if (point.y < m_min_y_value || point.y > m_max_y_value) {
+                continue;
+            }
+
+            double max_val_interval_x = m_max_x_value - m_min_x_value;
+            double point_val_interval_x = point.x - m_min_x_value;
+
+            int x_pos = (int)((getWidth() - m_left_padding) * (point_val_interval_x / max_val_interval_x));
+            x_pos += m_left_padding;
+
+            double max_val_interval_y = m_max_y_value - m_min_y_value;
+            double point_val_interval_y = point.y - m_min_y_value;
+
+            int y_pos = (int)((getHeight() - m_bottom_padding) * (1 - point_val_interval_y / max_val_interval_y));
+
+
+            transformed_point.x = x_pos;
+            transformed_point.y = y_pos;
+
+            transformed_points.add(transformed_point);
+        }
+
+        return transformed_points;
     }
 
 

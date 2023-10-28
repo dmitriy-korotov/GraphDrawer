@@ -34,6 +34,10 @@ public class CoordinatePlaneWrapper extends JLayeredPane {
             remove(m_active_plane);
         }
 
+        int index_active_plane = m_coordinate_planes.indexOf(_plane);
+        var active_top_bar_item = m_top_bar_items.get(index_active_plane);
+        active_top_bar_item.setBackground(Color.GREEN);
+
         m_active_plane = _plane;
         add(m_active_plane, BorderLayout.CENTER);
     }
@@ -47,10 +51,30 @@ public class CoordinatePlaneWrapper extends JLayeredPane {
     public void AddCoordinatePlane(CoordinatePlane _plane) {
 
         m_coordinate_planes.add(_plane);
-        JMenuItem graph = new JMenuItem("Graph");
+        JMenuItem graph = new JMenuItem("Graph " + (m_coordinate_planes.size()));
         graph.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        m_top_bar_items.add(graph);
+
+        graph.setActionCommand("Clicked");
+        graph.addActionListener(_event -> {
+            if (_event.getActionCommand().equals("Clicked")) {
+
+                var active_plane = GetActivePlane();
+                int index_prev_active_plane = m_coordinate_planes.indexOf(active_plane);
+                var active_top_bar_item = m_top_bar_items.get(index_prev_active_plane);
+                active_top_bar_item.setBackground(Color.WHITE);
+
+                int index_new_active_plane = m_top_bar_items.indexOf(graph);
+                graph.setBackground(Color.GREEN);
+                SetupActivePlane(m_coordinate_planes.get(index_new_active_plane));
+
+                revalidate();
+
+            }
+        });
+
         m_top_bar.add(graph);
-        m_top_bar.invalidate();
+        m_top_bar.revalidate();
     }
 
 
@@ -61,11 +85,12 @@ public class CoordinatePlaneWrapper extends JLayeredPane {
         setBackground(Color.WHITE);
         setVisible(true);
 
+        SetupPlaneSelector();
+
         CoordinatePlane coordinate_plane = new CoordinatePlane(m_context);
-        m_coordinate_planes.add(coordinate_plane);
+        AddCoordinatePlane(coordinate_plane);
         SetupActivePlane(coordinate_plane);
 
-        SetupPlaneSelector();
 
         m_context.getContentPane().add(this, BorderLayout.CENTER);
 
@@ -76,20 +101,7 @@ public class CoordinatePlaneWrapper extends JLayeredPane {
     private void SetupPlaneSelector() {
 
         m_top_bar = new JMenuBar();
-
-        for (int i = 0; i < m_coordinate_planes.size(); i++) {
-            JMenuItem graph = new JMenuItem("Graph " + (i + 1));
-            graph.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
-            if (m_coordinate_planes.get(i) == m_active_plane) {
-                graph.setBackground(Color.GREEN);
-            }
-
-            m_top_bar.add(graph);
-        }
-
         m_top_bar.setVisible(true);
-
         m_top_bar.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         add(m_top_bar, BorderLayout.NORTH);

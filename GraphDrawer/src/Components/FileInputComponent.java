@@ -1,6 +1,7 @@
 package Components;
 
 import Application.GraphDrawerApp;
+import Utility.Graph;
 import Utility.PointsReader;
 
 import javax.swing.*;
@@ -56,10 +57,8 @@ public class FileInputComponent extends JPanel implements ComponentListener {
                     if (!Objects.equals(filename, "")) {
                         try {
                             PointsReader reader = new PointsReader(filename);
-                            for (var point:
-                                 reader.GetPoints()) {
-                                System.out.println("(" + point.x + ", " + point.y + ")");
-                            }
+                            CoordinatePlane active_plane = m_context.GetCoordinatePlaneWrapper().GetActivePlane();
+                            active_plane.AddGraph(new Graph(reader.GetPoints()));
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
