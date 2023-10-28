@@ -36,7 +36,7 @@ public class CoordinatePlaneWrapper extends JLayeredPane {
 
         int index_active_plane = m_coordinate_planes.indexOf(_plane);
         var active_top_bar_item = m_top_bar_items.get(index_active_plane);
-        active_top_bar_item.setBackground(Color.GREEN);
+        active_top_bar_item.setBackground(Color.CYAN);
 
         m_active_plane = _plane;
         add(m_active_plane, BorderLayout.CENTER);

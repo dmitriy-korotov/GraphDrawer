@@ -1,6 +1,7 @@
 package Components;
 
 import Application.GraphDrawerApp;
+import Utility.Graph;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +14,12 @@ public class SideBar extends JPanel implements ComponentListener {
 
     private GraphDrawerApp m_context = null;
 
-    private FileInputComponent m_file_input_field = null;
+    private Graph m_current_graph_instance = new Graph();
+
+    private FileInputComponent m_file_input_button = null;
+    private NewPlaneButton m_new_plane_button = null;
+    private NewGraphButton m_new_graph_button = null;
+    private ColorSelectButton m_color_select_button = null;
 
 
 
@@ -22,44 +28,46 @@ public class SideBar extends JPanel implements ComponentListener {
     public SideBar(GraphDrawerApp _context) {
         m_context = _context;
         addComponentListener(this);
-        SetupSideBar();
+        Initialize();
     }
 
 
-    private void SetupSideBar() {
+
+    public Graph GetCurrentGraphInstance() {
+        return m_current_graph_instance;
+    }
+
+
+
+    public void ResetCurrentGraphInstance() {
+        m_current_graph_instance = new Graph();
+    }
+
+
+
+    private void Initialize() {
 
         setBackground(Color.LIGHT_GRAY);
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-        m_file_input_field = new FileInputComponent(m_context);
-        add(m_file_input_field, BorderLayout.NORTH);
+        Box box = Box.createVerticalBox();
 
-        JButton button = new JButton("Add new plane");
-        button.setVisible(true);
+        m_file_input_button = new FileInputComponent("Select graph file", m_context);
+        box.add(m_file_input_button);
 
-        button.setActionCommand("Clicked");
-        button.addActionListener(_event -> {
-            if (_event.getActionCommand().equals("Clicked")) {
+        m_color_select_button = new ColorSelectButton("Select graph color", Color.BLUE, m_context);
+        box.add(m_color_select_button);
 
-                CoordinatePlane new_plane = new CoordinatePlane(m_context);
+        m_new_graph_button = new NewGraphButton("Add graph on this plane", m_context);
+        box.add(m_new_graph_button);
 
-                var wrapper = m_context.GetCoordinatePlaneWrapper();
+        add(box, BorderLayout.CENTER);
 
-                wrapper.AddCoordinatePlane(new_plane);
-            }
-        });
-
-
-        /*String[] courses = { "core java","advance java", "java servlet"};
-        JComboBox c = new JComboBox(courses);
-        c.setBounds(40,40,90,20);
-        add(c, BorderLayout.NORTH);*/
-
-        add(button, BorderLayout.SOUTH);
+        m_new_plane_button = new NewPlaneButton("Add new plane", m_context);
+        add(m_new_plane_button, BorderLayout.SOUTH);
 
         m_context.getContentPane().add(this, BorderLayout.WEST);
-
     }
 
 

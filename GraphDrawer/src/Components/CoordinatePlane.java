@@ -86,7 +86,7 @@ public class CoordinatePlane extends JComponent {
         if (points.isEmpty())
             return;
 
-        _ctx.setColor(Color.RED);
+        _ctx.setColor(_graph.GetColor());
 
         int radius = 6;
 

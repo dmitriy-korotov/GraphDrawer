@@ -10,9 +10,15 @@ public class Graph {
     private Double m_min_y = 0.;
     private Double m_max_y = 0.;
 
+    private Color m_color = Color.BLUE;
+
     private ArrayList<Point> m_points = new ArrayList<>();
 
 
+
+
+
+    public Graph() { }
 
 
 
@@ -29,6 +35,18 @@ public class Graph {
         m_min_x = __getMinCoordinateX();
         m_max_y = __getMaxCoordinateY();
         m_min_y = __getMinCoordinateY();
+    }
+
+
+
+    public void SetColor(Color _color) {
+        m_color = _color;
+    }
+
+
+
+    public Color GetColor() {
+        return m_color;
     }
 
 

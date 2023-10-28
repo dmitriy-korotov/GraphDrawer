@@ -6,6 +6,7 @@ import Utility.ILogger;
 import Utility.SeverityLevel;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -71,5 +72,26 @@ public class Application extends JFrame {
     public void Close() {
         setVisible(false);
         dispose();
+    }
+
+
+
+    public void SetFullScreenMode() {
+        Dimension screenSize = Toolkit. getDefaultToolkit(). getScreenSize();
+        setPreferredSize(screenSize);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setVisible(true);
+    }
+
+
+
+    public void SetWindowMode() {
+
+    }
+
+
+
+    public void HideWindow() {
+
     }
 }
