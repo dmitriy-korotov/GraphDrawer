@@ -135,8 +135,8 @@ public class CoordinatePlane extends JComponent implements MouseInputListener, M
 
             Point transformed_point = new Point();
 
-            double point_x = m_is_log_scale ? Math.log(point.x) : point.x;
-            double point_y = m_is_log_scale ? Math.log(point.y) : point.y;
+            double point_x = m_is_log_scale ? Math.log(point.getX()) : point.getX();
+            double point_y = m_is_log_scale ? Math.log(point.getY()) : point.getY();
 
             double max_val_interval_x = max_x_val - min_x_val;
             double point_val_interval_x = point_x - min_x_val;
@@ -150,8 +150,7 @@ public class CoordinatePlane extends JComponent implements MouseInputListener, M
             int y_pos = (int)((getHeight() - m_bottom_padding) * (1 - point_val_interval_y / max_val_interval_y));
 
 
-            transformed_point.x = x_pos;
-            transformed_point.y = y_pos;
+            transformed_point.setLocation(x_pos, y_pos);
 
             transformed_points.add(transformed_point);
         }

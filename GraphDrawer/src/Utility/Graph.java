@@ -60,7 +60,7 @@ public class Graph {
         double min_coord_x = Double.MAX_VALUE;
         for (Point point:
                 m_points) {
-            min_coord_x = Math.min(min_coord_x, point.x);
+            min_coord_x = Math.min(min_coord_x, point.getX());
         }
         return min_coord_x;
     }
@@ -74,7 +74,7 @@ public class Graph {
         double max_coord_x = Double.MIN_VALUE;
         for (Point point:
                 m_points) {
-            max_coord_x = Math.max(max_coord_x, point.x);
+            max_coord_x = Math.max(max_coord_x, point.getX());
         }
         return max_coord_x;
     }
@@ -88,7 +88,7 @@ public class Graph {
         double min_coord_y = Double.MAX_VALUE;
         for (Point point:
                 m_points) {
-            min_coord_y = Math.min(min_coord_y, point.y);
+            min_coord_y = Math.min(min_coord_y, point.getY());
         }
         return min_coord_y;
     }
@@ -102,7 +102,7 @@ public class Graph {
         double max_coord_y = Double.MIN_VALUE;
         for (Point point:
                 m_points) {
-            max_coord_y = Math.max(max_coord_y, point.y);
+            max_coord_y = Math.max(max_coord_y, point.getY());
         }
         return max_coord_y;
     }

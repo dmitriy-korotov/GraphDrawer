@@ -48,8 +48,7 @@ public class PointsReader {
                 String[] coordinates = line.split(m_separator);
 
                 Point point = new Point();
-                point.x = Integer.parseInt(coordinates[0]);
-                point.y = Integer.parseInt(coordinates[1]);
+                point.setLocation(Double.parseDouble(coordinates[0]), Double.parseDouble(coordinates[1]));
 
                 m_points.add(point);
 

@@ -32,7 +32,7 @@ public class ColorSelectButton extends JButton {
         addActionListener(_event -> {
             if (_event.getActionCommand().equals("Clicked")) {
 
-                m_selected_color = JColorChooser.showDialog(null, "Select graph color", Color.BLUE);
+                m_selected_color = JColorChooser.showDialog(m_context, "Select graph color", Color.BLUE);
 
                 m_context.GetSideBar().GetCurrentGraphInstance().SetColor(m_selected_color);
 
