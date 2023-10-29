@@ -20,6 +20,7 @@ public class SideBar extends JPanel implements ComponentListener {
     private NewPlaneButton m_new_plane_button = null;
     private NewGraphButton m_new_graph_button = null;
     private ColorSelectButton m_color_select_button = null;
+    private LogScaleButton m_log_scale_button = null;
 
 
 
@@ -61,6 +62,9 @@ public class SideBar extends JPanel implements ComponentListener {
 
         m_new_graph_button = new NewGraphButton("Add graph on this plane", m_context);
         box.add(m_new_graph_button);
+
+        m_log_scale_button = new LogScaleButton(m_context);
+        box.add(m_log_scale_button);
 
         add(box, BorderLayout.CENTER);
 

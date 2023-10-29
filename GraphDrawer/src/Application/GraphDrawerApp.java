@@ -3,10 +3,13 @@ package Application;
 import Components.CoordinatePlaneWrapper;
 import Components.Menu;
 import Components.SideBar;
+import Utility.Graph;
+import Utility.PointsReader;
 
 import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.io.IOException;
 import java.util.Properties;
 
 public class GraphDrawerApp extends Application implements ComponentListener {
@@ -31,7 +34,18 @@ public class GraphDrawerApp extends Application implements ComponentListener {
 
         LinkComponents();
 
-        OnWindowOpen();
+        Initialize();
+    }
+
+
+
+    public GraphDrawerApp(String _path_to_config, String _path_to_graph) throws IOException {
+
+        this(_path_to_config);
+
+        PointsReader reader = new PointsReader(_path_to_graph);
+
+        m_coordinate_plane.GetActivePlane().AddGraph(new Graph(reader.GetPoints()));
     }
 
 
@@ -47,12 +61,11 @@ public class GraphDrawerApp extends Application implements ComponentListener {
         m_menu = new Menu("Options", this);
         m_sidebar = new SideBar(this);
         m_coordinate_plane = new CoordinatePlaneWrapper(this);
-
     }
 
 
 
-    private void OnWindowOpen() {
+    private void Initialize() {
         setVisible(true);
         componentResized(null);
     }
@@ -75,20 +88,21 @@ public class GraphDrawerApp extends Application implements ComponentListener {
 
     public void componentResized(ComponentEvent _event) {
         if (m_sidebar != null) {
-            m_sidebar.setPreferredSize(new Dimension(getWidth() / 5, getHeight()));
+            m_sidebar.setPreferredSize(new Dimension(getWidth() / 6, getHeight()));
+            m_sidebar.revalidate();
         }
     }
 
+    public void componentHidden(ComponentEvent _event) {
 
+    }
 
-    public void componentHidden(ComponentEvent _event) {}
+    public void componentMoved(ComponentEvent _event) {
 
+    }
 
+    public void componentShown(ComponentEvent _event) {
 
-    public void componentMoved(ComponentEvent _event) {}
-
-
-
-    public void componentShown(ComponentEvent _event) {}
+    }
 
 }

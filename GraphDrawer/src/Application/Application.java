@@ -8,6 +8,7 @@ import Utility.SeverityLevel;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Properties;
 
 public class Application extends JFrame {
@@ -20,7 +21,7 @@ public class Application extends JFrame {
 
 
 
-    protected Application() { SetDefaultSettings(); }
+    protected Application() { Initialize(); }
 
 
 
@@ -57,11 +58,16 @@ public class Application extends JFrame {
         if (m_config.containsKey("title")) {
             setTitle(m_config.getProperty("title"));
         }
+        if (m_config.containsKey("open_mode")) {
+            if (Objects.equals(m_config.getProperty("open_mode"), "full_screen")) {
+                SetFullScreenMode();
+            }
+        }
     }
 
 
 
-    private void SetDefaultSettings() {
+    private void Initialize() {
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);

@@ -87,13 +87,12 @@ public class CoordinatePlaneWrapper extends JLayeredPane {
 
         SetupPlaneSelector();
 
-        CoordinatePlane coordinate_plane = new CoordinatePlane(m_context);
+        CoordinatePlane coordinate_plane = new CoordinatePlane();
         AddCoordinatePlane(coordinate_plane);
         SetupActivePlane(coordinate_plane);
 
 
         m_context.getContentPane().add(this, BorderLayout.CENTER);
-
     }
 
 

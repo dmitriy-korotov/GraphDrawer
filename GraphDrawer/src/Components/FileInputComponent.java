@@ -1,12 +1,10 @@
 package Components;
 
 import Application.GraphDrawerApp;
-import Utility.Graph;
 import Utility.PointsReader;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;

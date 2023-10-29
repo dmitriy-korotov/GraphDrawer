@@ -1,7 +1,6 @@
 package Components;
 
 import Application.GraphDrawerApp;
-import Utility.Graph;
 
 import javax.swing.*;
 
@@ -29,7 +28,7 @@ public class NewPlaneButton extends JButton {
         addActionListener(_event -> {
             if (_event.getActionCommand().equals("Clicked")) {
 
-                CoordinatePlane new_plane = new CoordinatePlane(m_context);
+                CoordinatePlane new_plane = new CoordinatePlane();
 
                 var wrapper = m_context.GetCoordinatePlaneWrapper();
 

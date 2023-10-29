@@ -55,7 +55,7 @@ public class Graph {
 
 
 
-    public double __getMinCoordinateX() {
+    private double __getMinCoordinateX() {
 
         double min_coord_x = Double.MAX_VALUE;
         for (Point point:
@@ -69,7 +69,7 @@ public class Graph {
 
 
 
-    public double __getMaxCoordinateX() {
+    private double __getMaxCoordinateX() {
 
         double max_coord_x = Double.MIN_VALUE;
         for (Point point:
@@ -83,7 +83,7 @@ public class Graph {
 
 
 
-    public double __getMinCoordinateY() {
+    private double __getMinCoordinateY() {
 
         double min_coord_y = Double.MAX_VALUE;
         for (Point point:
@@ -97,7 +97,7 @@ public class Graph {
 
 
 
-    public double __getMaxCoordinateY() {
+    private double __getMaxCoordinateY() {
 
         double max_coord_y = Double.MIN_VALUE;
         for (Point point:
